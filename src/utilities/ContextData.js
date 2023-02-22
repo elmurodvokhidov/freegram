@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import firebase from 'firebase/compat/app';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import 'firebase/database';
@@ -8,13 +8,22 @@ export const ContextData = React.createContext();
 const ContextProvider = ({ children }) => {
 
     const [user, loading] = useAuthState(firebase.auth());
+    const [change, setChange] = useState(true);
 
-    console.log(user);
+    // console.log(user);
+
+    // Changer Function
+    function changeFunc() {
+        setChange(!change);
+    }
 
     return (
         <ContextData.Provider value={{
             user,
-            loading
+            loading,
+            change,
+            setChange,
+            changeFunc,
         }}>
             {children}
         </ContextData.Provider>

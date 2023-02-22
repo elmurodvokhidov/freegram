@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+.App {
+    max-width: 1800px;
+    margin: 0 auto;
+    background-color: #212121;
+}
+
+.register {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    color: white;
+}
+
+.logo {
+    font-size: 150px;
+    color: #8774E1;
+}
+
+.register h1 {
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+.register form {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.register form button {
+    width: 100%;
+    color: white;
+    padding: 10px;
+    margin-top: 30px;
+    background-color: #8774E1;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+.register form input {
+    width: 100%;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+.register form label {
+    width: 100%;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+.register .about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.register .about p {
+    color: silver;
+}
+
+.register .footer {
+    margin-top: -12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.register .footer button {
+    border: none;
+    outline: none;
+    color: #8774E1;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0);
+}

@@ -8,8 +8,6 @@ function ChatRoom() {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
 
-    console.log(messages);
-
     const auth = getAuth();
     const database = getDatabase();
 
