@@ -2,6 +2,10 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth'; import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
+import { BiMenu, BiSearch } from "react-icons/bi";
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { IconButton } from '@mui/material';
 
 function ChatRoom() {
     const [user, setUser] = useState(null);
@@ -60,8 +64,25 @@ function ChatRoom() {
     };
 
     return (
-        <div>
-            {user ? (
+        <div className="chatRoom">
+            <div className="left">
+                <div className="top">
+                    <div className="menu">
+                        <Stack direction="row" spacing={1}>
+                            <IconButton color="primary" aria-label="add to shopping cart">
+                                <span><BiMenu /></span>
+                            </IconButton>
+                        </Stack>
+                    </div>
+                    <div className="search">
+                        <label htmlFor="search"><span><BiSearch /></span></label>
+                        <input type="text" name="search" id="search" placeholder='Search' />
+                    </div>
+                </div>
+                <div className="peopleList"></div>
+            </div>
+            <div className="right"></div>
+            {/* {user ? (
                 <button onClick={handleSignOut}>Sign Out</button>
             ) : (
                 <button onClick={handleSignIn}>Sign In with Google</button>
@@ -82,7 +103,7 @@ function ChatRoom() {
                     />
                     <button type="submit">Send</button>
                 </form>
-            )}
+            )} */}
         </div>
     );
 }

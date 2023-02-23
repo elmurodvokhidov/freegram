@@ -54,6 +54,13 @@
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
 }
+.controlInp {
+    width: 100%;
+}
+
+.controlInp input {
+    width: 100%;
+}
 
 .register form label {
     width: 100%;
@@ -87,4 +94,64 @@
     cursor: pointer;
     font-size: 16px;
     background-color: rgba(255, 255, 255, 0);
+}
+
+/* Loader */
+.loader {
+    width: 100%;
+    height: 100vh;
+    background-color: #212121;
+}
+
+/* Chat Room */
+.chatRoom {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: #212121;
+}
+
+.chatRoom .left {
+    width: 27%;
+    height: 100%;
+}
+
+.chatRoom .right {
+    width: 73%;
+    height: 100%;
+    background-color: blue;
+}
+
+.chatRoom .left .top {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+    padding: 10px 15px;
+}
+
+.chatRoom .top .menu span {
+    font-size: 30px;
+    color: white;
+}
+
+.chatRoom .top .search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border-radius: 20px;
+    padding: 0px 10px;
+    background-color: #181818;
+}
+
+.chatRoom .search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    background-color: rgba(255, 255, 255, 0);
+}
+.chatRoom .search span {
+    font-size: 25px;
 }

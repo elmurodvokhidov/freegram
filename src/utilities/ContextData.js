@@ -7,7 +7,7 @@ export const ContextData = React.createContext();
 
 const ContextProvider = ({ children }) => {
 
-    const [user, loading] = useAuthState(firebase.auth());
+    const [user, loading, error] = useAuthState(firebase.auth());
     const [change, setChange] = useState(true);
 
     // console.log(user);
@@ -24,6 +24,7 @@ const ContextProvider = ({ children }) => {
             change,
             setChange,
             changeFunc,
+            error,
         }}>
             {children}
         </ContextData.Provider>
