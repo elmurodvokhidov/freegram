@@ -54,6 +54,7 @@
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
 }
+
 .controlInp {
     width: 100%;
 }
@@ -114,37 +115,36 @@
 .chatRoom .left {
     width: 27%;
     height: 100%;
-}
-
-.chatRoom .right {
-    width: 73%;
-    height: 100%;
-    background-image: url('../public/img/chatBackground.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    overflow: hidden;
 }
 
 .chatRoom .left .top {
     width: 100%;
     display: flex;
-    gap: 15px;
-    padding: 10px 15px;
+    gap: 10px;
+    padding: 12px 18px;
 }
 
 .chatRoom .top .menu span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 100;
     font-size: 30px;
     color: white;
 }
 
 .chatRoom .top .search {
     width: 100%;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    border-radius: 20px;
-    padding: 0px 10px;
+    border: 0.2px solid silver;
+    border-radius: 30px;
+    padding: 0px 15px;
+    color: silver;
     background-color: #181818;
 }
 
@@ -152,9 +152,126 @@
     width: 100%;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 20px;
+    color: white;
     background-color: rgba(255, 255, 255, 0);
 }
+
+.chatRoom .search:focus-within {
+    color: #8774E1;
+    border: 2px solid #8774E1;
+}
+
 .chatRoom .search span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.peopleList {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 10px 0px;
+}
+
+.peopleCard {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+.peopleCard:active {
+    background-color: #8774E1;
+}
+
+.pcLeft {
+    display: flex;
+    gap: 15px;
+}
+
+.profileImg {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.profileImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.peopleCard .profileTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 0px 0px;
+}
+
+.peopleCard .profileTitle .profileName {
+    font-size: 20px;
+}
+
+.peopleCard .profileTitle .lastMessage {
+    color: silver;
+}
+
+.messageTime {
+    padding: 10px 0px 0px;
+    color: silver;
+}
+
+.chatRoom .right {
+    width: 73%;
+    height: 100%;
+    background-image: url('../public/img/chatRoomBackground.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 0px 0px 0px .5px;
+}
+
+.right .top {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
+    color: white;
+    background-color: #212121;
+}
+
+.right .profileAction {
+    display: flex;
+    gap: 15px;
+}
+
+.right .profileAction .menu span {
+    color: silver;
     font-size: 25px;
+}
+
+.right .top .profileImg {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    background-color: blue;
+}
+
+.right .top .profileName {
+    font-size: 20px;
+}
+
+.right .top .profileTitle .lastOnline {
+    color: silver;
 }

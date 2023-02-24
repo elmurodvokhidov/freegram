@@ -2,10 +2,11 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth'; import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { BiMenu, BiSearch } from "react-icons/bi";
+import { BiDotsVerticalRounded, BiMenu, BiSearch } from "react-icons/bi";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { IconButton } from '@mui/material';
+import { FiPhone } from "react-icons/fi";
 
 function ChatRoom() {
     const [user, setUser] = useState(null);
@@ -66,6 +67,7 @@ function ChatRoom() {
     return (
         <div className="chatRoom">
             <div className="left">
+                {/* Top */}
                 <div className="top">
                     <div className="menu">
                         <Stack direction="row" spacing={1}>
@@ -79,9 +81,112 @@ function ChatRoom() {
                         <input type="text" name="search" id="search" placeholder='Search' />
                     </div>
                 </div>
-                <div className="peopleList"></div>
+
+                {/* People List */}
+                <div className="peopleList">
+                    <div className="peopleCard">
+                        <div className="pcLeft">
+                            <div className="profileImg">
+                                <figure><img src="https://www.aceshowbiz.com/images/photo/alexander_rybak.jpg" alt="profileImage" /></figure>
+                            </div>
+
+                            <div className="profileTitle">
+                                <p className="profileName">Alexander Rybak</p>
+                                <p className="lastMessage">What's this?</p>
+                            </div>
+                        </div>
+
+                        <div className="messageTime">
+                            <span>10</span>
+                            <span>:</span>
+                            <span>19</span>
+                            <span>PM</span>
+                        </div>
+                    </div>
+
+
+                    <div className="peopleCard">
+                        <div className="pcLeft">
+                            <div className="profileImg">
+                                <figure><img src="https://www.aceshowbiz.com/images/photo/alexander_rybak.jpg" alt="profileImage" /></figure>
+                            </div>
+
+                            <div className="profileTitle">
+                                <p className="profileName">Alexander Rybak</p>
+                                <p className="lastMessage">What's this?</p>
+                            </div>
+                        </div>
+
+                        <div className="messageTime">
+                            <span>10</span>
+                            <span>:</span>
+                            <span>19</span>
+                            <span>PM</span>
+                        </div>
+                    </div>
+
+
+                    <div className="peopleCard">
+                        <div className="pcLeft">
+                            <div className="profileImg">
+                                <figure><img src="https://www.aceshowbiz.com/images/photo/alexander_rybak.jpg" alt="profileImage" /></figure>
+                            </div>
+
+                            <div className="profileTitle">
+                                <p className="profileName">Alexander Rybak</p>
+                                <p className="lastMessage">What's this?</p>
+                            </div>
+                        </div>
+
+                        <div className="messageTime">
+                            <span>10</span>
+                            <span>:</span>
+                            <span>19</span>
+                            <span>PM</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className="right"></div>
+
+            {/* Right */}
+            <div className="right">
+                <div className="top">
+                    <div className="pcLeft">
+                        <div className="profileImg">
+                            <figure><img src="https://www.aceshowbiz.com/images/photo/alexander_rybak.jpg" alt="profileImage" /></figure>
+                        </div>
+
+                        <div className="profileTitle">
+                            <p className="profileName">Alexander Rybak</p>
+                            <p className="lastOnline">last seen <span>35</span> minutes ago</p>
+                        </div>
+                    </div>
+
+                    <div className="profileAction">
+                        <div className="menu call">
+                            <Stack direction="row" spacing={1}>
+                                <IconButton color="primary" aria-label="add to shopping cart">
+                                    <span><FiPhone /></span>
+                                </IconButton>
+                            </Stack>
+                        </div>
+                        <div className="menu profileSearch">
+                            <Stack direction="row" spacing={1}>
+                                <IconButton color="primary" aria-label="add to shopping cart">
+                                    <span><BiSearch /></span>
+                                </IconButton>
+                            </Stack>
+                        </div>
+                        <div className="menu moreAction">
+                            <Stack direction="row" spacing={1}>
+                                <IconButton color="primary" aria-label="add to shopping cart">
+                                    <span><BiDotsVerticalRounded /></span>
+                                </IconButton>
+                            </Stack>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {/* {user ? (
                 <button onClick={handleSignOut}>Sign Out</button>
             ) : (
