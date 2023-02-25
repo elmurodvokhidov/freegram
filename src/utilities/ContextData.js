@@ -9,6 +9,7 @@ const ContextProvider = ({ children }) => {
 
     const [user, loading, error] = useAuthState(firebase.auth());
     const [change, setChange] = useState(true);
+    const [errorAuth, setErrorAuth] = useState([]);
 
     // console.log(user);
 
@@ -25,6 +26,8 @@ const ContextProvider = ({ children }) => {
             setChange,
             changeFunc,
             error,
+            errorAuth,
+            setErrorAuth,
         }}>
             {children}
         </ContextData.Provider>

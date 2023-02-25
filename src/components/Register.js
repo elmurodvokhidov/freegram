@@ -13,7 +13,6 @@ function Register() {
 
     const { user, change, changeFunc } = useContext(ContextData);
 
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

@@ -1,17 +1,25 @@
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth'; import { useState, useEffect } from 'react';
+import 'firebase/compat/auth';
+import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { BiDotsVerticalRounded, BiMenu, BiSearch } from "react-icons/bi";
+import { BiDotsVerticalRounded, BiLogOut, BiMenu, BiSearch } from "react-icons/bi";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { IconButton } from '@mui/material';
+import { FormControlLabel, FormGroup, IconButton, Switch } from '@mui/material';
 import { FiPhone } from "react-icons/fi";
+import { IoSend } from "react-icons/io5";
+import { BsBookmark, BsEmojiSmile } from "react-icons/bs";
+import { ImAttachment } from "react-icons/im";
+import { RiMoonClearLine } from "react-icons/ri";
+import { MdOutlinePersonOutline } from "react-icons/md";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
 function ChatRoom() {
     const [user, setUser] = useState(null);
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
+    const [menuModal, setMenuModal] = useState(false);
 
     const auth = getAuth();
     const database = getDatabase();
@@ -66,12 +74,12 @@ function ChatRoom() {
 
     return (
         <div className="chatRoom">
-            <div className="left">
+            <div className="left" onMouseLeave={() => setMenuModal(false)}>
                 {/* Top */}
                 <div className="top">
                     <div className="menu">
                         <Stack direction="row" spacing={1}>
-                            <IconButton color="primary" aria-label="add to shopping cart">
+                            <IconButton onClick={() => setMenuModal(!menuModal)} color="primary" aria-label="add to shopping cart">
                                 <span><BiMenu /></span>
                             </IconButton>
                         </Stack>
@@ -79,6 +87,17 @@ function ChatRoom() {
                     <div className="search">
                         <label htmlFor="search"><span><BiSearch /></span></label>
                         <input type="text" name="search" id="search" placeholder='Search' />
+                    </div>
+
+                    {/* Menu Modal */}
+                    <div className="menuModal" id={menuModal ? 'menuModal' : ''}>
+                        <button><span><BsBookmark /></span><p>Saved Messages</p></button>
+                        <button><span><MdOutlinePersonOutline /></span><p>Profile</p></button>
+                        <button className="switchDarkmode"><span><RiMoonClearLine /></span><p>Dark Mode</p>
+                        </button>
+                        <button><span><AiOutlineQuestionCircle /></span><p>Telegram Features</p></button>
+                        <button onClick={handleSignOut}><span><BiLogOut /></span><p>Log out</p></button>
+                        <h2>Freegram Web 1.0.0 (306)</h2>
                     </div>
                 </div>
 
@@ -181,6 +200,35 @@ function ChatRoom() {
                             <Stack direction="row" spacing={1}>
                                 <IconButton color="primary" aria-label="add to shopping cart">
                                     <span><BiDotsVerticalRounded /></span>
+                                </IconButton>
+                            </Stack>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="userMessage">
+                    <div className="sendMessage">
+                        <div className="smContent">
+                            <div className="menu">
+                                <Stack direction="row" spacing={1}>
+                                    <IconButton color="primary" aria-label="add to shopping cart">
+                                        <span><BsEmojiSmile /></span>
+                                    </IconButton>
+                                </Stack>
+                            </div>
+                            <textarea value={message} onChange={(event) => setMessage(event.target.value)} name="message" id="message" cols="30" rows="1"></textarea>
+                            <div className="menu">
+                                <Stack direction="row" spacing={1}>
+                                    <IconButton color="primary" aria-label="add to shopping cart">
+                                        <span><ImAttachment /></span>
+                                    </IconButton>
+                                </Stack>
+                            </div>
+                        </div>
+                        <div className="menu sendBtn">
+                            <Stack direction="row" spacing={1}>
+                                <IconButton color="primary" aria-label="add to shopping cart">
+                                    <span><IoSend /></span>
                                 </IconButton>
                             </Stack>
                         </div>
