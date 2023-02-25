@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 import { BiDotsVerticalRounded, BiLogOut, BiMenu, BiSearch } from "react-icons/bi";
-import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { FormControlLabel, FormGroup, IconButton, Switch } from '@mui/material';
 import { FiPhone } from "react-icons/fi";
@@ -14,15 +13,47 @@ import { ImAttachment } from "react-icons/im";
 import { RiMoonClearLine } from "react-icons/ri";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
+
+
+const firebaseConfig = {
+    // Your Firebase project config
+    apiKey: "AIzaSyAeyUpul0_tZFnsHPeQZiiYWG8C1jmKuQ8",
+    authDomain: "freegram-2bb53.firebaseapp.com",
+    projectId: "freegram-2bb53",
+    storageBucket: "freegram-2bb53.appspot.com",
+    messagingSenderId: "352833183360",
+    appId: "1:352833183360:web:3346d098ddc52326f11065"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 
 function ChatRoom() {
-    const [user, setUser] = useState(null);
-    const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
     const [menuModal, setMenuModal] = useState(false);
+    const [user, setUser] = useState(null);
+    const [messages, setMessages] = useState([]);
+    const [newMessage, setNewMessage] = useState('');
 
     const auth = getAuth();
     const database = getDatabase();
+
+    useEffect(() => {
+        // Subscribe to messages collection
+        const unsubscribe = onSnapshot(collection(db, 'messages'), (snapshot) => {
+            const newMessages = snapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setMessages(newMessages);
+        });
+
+        // Clean up event listener when component unmounts
+        return () => unsubscribe();
+    }, [db]);
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -35,39 +66,32 @@ function ChatRoom() {
         return unsubscribe;
     }, [auth]);
 
-    useEffect(() => {
-        const messagesRef = ref(database, 'messages');
-        onValue(messagesRef, (snapshot) => {
-            const messagesObject = snapshot.val();
-            if (messagesObject) {
-                const messagesList = Object.keys(messagesObject).map((key) => ({
-                    ...messagesObject[key],
-                    key,
-                }));
-                setMessages(messagesList);
-            }
-        });
-    }, [database]);
 
-    const handleSendMessage = (event) => {
+    const handleNewMessageSubmit = async (event) => {
         event.preventDefault();
-        if (message.trim() === '') {
+        if (newMessage.trim() === '') {
             return;
         }
-        const newMessage = {
-            user: user.displayName,
-            text: message,
-            createdAt: new Date().toISOString(),
-        };
-        push(ref(database, 'messages'), newMessage);
-        setMessage('');
+        await addDoc(collection(db, 'messages'), {
+            text: newMessage,
+            userId: user.uid,
+            timestamp: new Date(),
+        });
+        setNewMessage('');
     };
 
-    const handleSignIn = () => {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider);
-    };
 
+    // if (!user) {
+    //     return <div>Loading...</div>;
+    // }
+
+    // Sign in Function
+    // const handleSignIn = () => {
+    //     const provider = new firebase.auth.GoogleAuthProvider();
+    //     auth.signInWithPopup(provider);
+    // };
+
+    // Sign out Function
     const handleSignOut = () => {
         auth.signOut();
     };
@@ -207,6 +231,23 @@ function ChatRoom() {
                 </div>
 
                 <div className="userMessage">
+                    <div className="messagesWrapper">
+                        {messages.sort((a, b) => a.timestamp?.seconds - b.timestamp?.seconds).map((val) => (
+                            <div className='userNewMessage' key={val.id}
+                                style={{
+                                    alignItems: user.uid === val.userId ? '' : 'flex-start',
+                                }}
+                            >
+                                <div className='newMessage'
+                                    style={{
+                                        backgroundColor: user.uid === val.userId ? '#8774E1' : '#212121',
+                                    }}
+                                >
+                                    <p className='userText'>{val.text}</p>
+                                    <p className='sentTime'>{new Date(val.timestamp?.seconds * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', })}</p>
+                                </div>
+                            </div>
+                        ))}</div>
                     <div className="sendMessage">
                         <div className="smContent">
                             <div className="menu">
@@ -216,7 +257,7 @@ function ChatRoom() {
                                     </IconButton>
                                 </Stack>
                             </div>
-                            <textarea value={message} onChange={(event) => setMessage(event.target.value)} name="message" id="message" cols="30" rows="1"></textarea>
+                            <textarea value={newMessage} onChange={(event) => setNewMessage(event.target.value)} name="message" id="message" cols="30" rows="1"></textarea>
                             <div className="menu">
                                 <Stack direction="row" spacing={1}>
                                     <IconButton color="primary" aria-label="add to shopping cart">
@@ -227,7 +268,7 @@ function ChatRoom() {
                         </div>
                         <div className="menu sendBtn">
                             <Stack direction="row" spacing={1}>
-                                <IconButton color="primary" aria-label="add to shopping cart">
+                                <IconButton onClick={(event) => handleNewMessageSubmit(event)} color="primary" aria-label="add to shopping cart">
                                     <span><IoSend /></span>
                                 </IconButton>
                             </Stack>
@@ -235,28 +276,6 @@ function ChatRoom() {
                     </div>
                 </div>
             </div>
-            {/* {user ? (
-                <button onClick={handleSignOut}>Sign Out</button>
-            ) : (
-                <button onClick={handleSignIn}>Sign In with Google</button>
-            )}
-            <ul>
-                {messages.map((message) => (
-                    <li key={message.key}>
-                        <strong>{message.user}</strong>: {message.text}
-                    </li>
-                ))}
-            </ul>
-            {user && (
-                <form onSubmit={handleSendMessage}>
-                    <input
-                        type="text"
-                        value={message}
-                        onChange={(event) => setMessage(event.target.value)}
-                    />
-                    <button type="submit">Send</button>
-                </form>
-            )} */}
         </div>
     );
 }

@@ -203,6 +203,10 @@
     background-color: #181818;
 }
 
+#activeCard {
+    background-color: #8774E1;
+}
+
 .chatRoom .search input {
     width: 100%;
     border: none;
@@ -342,7 +346,44 @@
     width: 65%;
     height: 100%;
     position: relative;
-    /* background-color: blue; */
+}
+
+.messagesWrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 10px;
+    padding-bottom: 90px;
+    overflow: auto;
+}
+
+.userNewMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    color: white;
+}
+
+.newMessage {
+    width: fit-content;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    padding: 8px 15px;
+    border-radius: 10px;
+    background-color: #8774E1;
+}
+
+.newMessage .userText {
+    font-size: 20px;
+}
+
+.sentTime {
+    font-size: 14px;
+    color: silver;
 }
 
 .sendMessage {

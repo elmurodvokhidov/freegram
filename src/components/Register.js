@@ -15,6 +15,7 @@ function Register() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
     // Handle registration function
     const handleRegister = () => {
@@ -28,40 +29,43 @@ function Register() {
             .catch((error) => {
                 // Handle errors here
                 console.error(error);
+                setError(error.message);
             });
     };
 
     return (
         user ? <ChatRoom user={user} /> :
             change ?
-                <div className='register'>
-                    <div className="logo"><span><ImTelegram /></span></div>
-                    <div className="about">
-                        <h1>Welcome to Freegram</h1>
-                        <p>Sign up to get started!</p>
-                    </div>
-                    <form>
-                        <Box
-                            type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                        >
-                            <TextField fullWidth label="Email" id="fullWidth" />
-                        </Box>
-                        <Box
-                            type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-                        >
-                            <TextField fullWidth label="Password" id="fullWidth" />
-                        </Box>
-                        <FormGroup>
-                            <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
-                        </FormGroup>
-                        <Stack spacing={2} direction="row">
-                            <Button variant="contained" type="button" onClick={handleRegister}>Register</Button>
-                        </Stack>
-                    </form>
-                    <div className="footer">
-                        <p>If you already have an account, <button onClick={changeFunc}>login</button> here</p>
-                    </div>
-                </div> : <Login />
+                error ? <div className='error'><h1>{error}</h1><button onClick={() => setError(null)}>Try again</button></div>
+                    :
+                    <div className='register'>
+                        <div className="logo"><span><ImTelegram /></span></div>
+                        <div className="about">
+                            <h1>Welcome to Freegram</h1>
+                            <p>Sign up to get started!</p>
+                        </div>
+                        <form>
+                            <Box
+                                type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                            >
+                                <TextField fullWidth label="Email" id="fullWidth" />
+                            </Box>
+                            <Box
+                                type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+                            >
+                                <TextField fullWidth label="Password" id="fullWidth" />
+                            </Box>
+                            <FormGroup>
+                                <FormControlLabel control={<Checkbox defaultChecked />} label="Remember me" />
+                            </FormGroup>
+                            <Stack spacing={2} direction="row">
+                                <Button variant="contained" type="button" onClick={handleRegister}>Register</Button>
+                            </Stack>
+                        </form>
+                        <div className="footer">
+                            <p>If you already have an account, <button onClick={changeFunc}>login</button> here</p>
+                        </div>
+                    </div> : <Login />
     );
 }
 
