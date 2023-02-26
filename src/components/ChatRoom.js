@@ -123,10 +123,12 @@ function ChatRoom() {
 
     return (
         <div className="chatRoom">
-            <div className="left" onMouseLeave={() => setMenuModal(false)}>
+            <div className="left"
+                onClick={() => setMenuModal(false)}
+                onMouseLeave={() => setMenuModal(false)}>
                 {/* Top */}
                 <div className="top">
-                    <div className="menu">
+                    <div className="menu" onClick={(e) => e.stopPropagation()}>
                         <Stack direction="row" spacing={1}>
                             <IconButton onClick={() => setMenuModal(!menuModal)} color="primary" aria-label="add to shopping cart">
                                 <span><BiMenu /></span>
@@ -139,12 +141,12 @@ function ChatRoom() {
                     </div>
 
                     {/* Menu Modal */}
-                    <div className="menuModal" id={menuModal ? 'menuModal' : ''}>
+                    <div className="menuModal" onClick={(e) => e.stopPropagation()} id={menuModal ? 'menuModal' : ''}>
                         <button><span><BsBookmark /></span><p>Saved Messages</p></button>
                         <button><span><MdOutlinePersonOutline /></span><p>Profile</p></button>
                         <button className="switchDarkmode"><span><RiMoonClearLine /></span><p>Dark Mode</p>
                         </button>
-                        <button><span><AiOutlineQuestionCircle /></span><p>Telegram Features</p></button>
+                        <button><a href="https://telegram.org/" target="_blank" rel="noopener noreferrer"><span><AiOutlineQuestionCircle /></span><p>Telegram Features</p></a></button>
                         <button onClick={handleSignOut}><span><BiLogOut /></span><p>Log out</p></button>
                         <h2>Freegram Web 1.0.0 (306)</h2>
                     </div>
@@ -217,7 +219,7 @@ function ChatRoom() {
             </div>
 
             {/* Right */}
-            <div className="right">
+            <div className="right" onClick={() => setMenuModal(false)}>
                 <div className="top">
                     <div className="pcLeft">
                         <div className="profileImg">

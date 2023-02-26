@@ -134,7 +134,6 @@
     border-radius: 10px;
     padding: 5px 5px 10px;
     background-color: #181818;
-    /* background-color: violet; */
 }
 
 #menuModal {
@@ -154,6 +153,15 @@
     user-select: none;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0);
+}
+
+.menuModal a {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    color: white;
+    user-select: none;
+    text-decoration: none;
 }
 
 .menuModal button:hover {
@@ -247,6 +255,10 @@
 }
 
 .peopleCard:active {
+    background-color: #8774E1;
+}
+
+.peopleCard:first-child {
     background-color: #8774E1;
 }
 
@@ -484,4 +496,162 @@
     user-select: none;
     color: #8774E1;
     background-color: rgba(255, 255, 255, 0);
+}
+
+/* Media */
+/* Media Query 1280px-1250px */
+@media (max-width: 1280px) and (min-width: 1250px) {
+    .userMessage {
+        width: 85%;
+    }
+}
+
+/* Media Query 1250px-1230px */
+@media (max-width: 1250px) and (min-width: 1230px) {
+    .userMessage {
+        width: 90%;
+    }
+}
+
+/* Media Query 1230px-1200px */
+@media (max-width: 1230px) and (min-width: 1200px) {
+    .chatRoom .left {
+        width: 35%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .chatRoom .right {
+        width: 65%;
+    }
+
+    .userMessage {
+        width: 95%;
+    }
+}
+
+/* Media Query 1100px-1000px */
+@media (max-width: 1100px) and (min-width: 1000px) {
+    .chatRoom .left {
+        width: 35%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .chatRoom .right {
+        width: 65%;
+    }
+
+    .userMessage {
+        width: 95%;
+    }
+
+    .chatRoom .top .search {
+        height: 40px;
+    }
+
+    .profileImg {
+        width: 55px;
+        height: 55px;
+    }
+
+    .peopleCard .profileTitle {
+        padding: 8px 0px 0px;
+    }
+
+    .right .top .profileImg {
+        width: 40px;
+        height: 40px;
+    }
+
+    #menuModal {
+        top: 90%;
+    }
+
+    .chatRoom .left .top {
+        padding: 10px 18px;
+    }
+
+    .peopleList {
+        padding: 0px 10px 0px;
+    }
+
+    .smContent {
+        border-radius: 20px;
+        padding: 0px 15px;
+    }
+
+    .sendBtn {
+        width: 55px;
+        height: 50px;
+    }
+
+    .sendBtn span {
+        font-size: 25px;
+    }
+
+    .chatRoom .top .menu span {
+        font-size: 25px;
+    }
+
+    .right .profileAction .menu span {
+        font-size: 20px;
+    }
+
+    .smContent .menu span {
+        font-size: 20px;
+    }
+
+    .chatRoom .search span {
+        font-size: 20px;
+    }
+
+    .menuModal span {
+        font-size: 20px;
+    }
+
+    .menuModal p {
+        font-size: 16px;
+    }
+
+    .menuModal h2 {
+        font-size: 16px;
+    }
+
+    .peopleCard .profileTitle .profileName {
+        font-size: 18px;
+    }
+
+    .pcLeft .profileTitle .profileName {
+        font-size: 18px;
+    }
+
+    .right .top .profileTitle .lastOnline {
+        font-size: 14px;
+    }
+
+    .peopleCard .profileTitle .lastMessage {
+        font-size: 14px;
+    }
+
+    .messageTime {
+        padding: 8px 0px 0px;
+        font-size: 14px;
+    }
+
+    .newMessage .userText {
+        font-size: 16px;
+    }
+
+    .sentTime {
+        font-size: 12px;
+    }
+
+    .chatRoom .search input {
+        font-size: 16px;
+    }
+
+    .smContent textarea {
+        font-size: 16px;
+    }
 }
