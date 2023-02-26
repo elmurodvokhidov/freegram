@@ -4,6 +4,8 @@ import 'firebase/compat/auth';
 import { Box, Button, Stack, TextField } from '@mui/material';
 import { ImTelegram } from 'react-icons/im';
 import { ContextData } from '../utilities/ContextData';
+import { BiErrorCircle } from 'react-icons/bi';
+import Swal from 'sweetalert2';
 
 function Login() {
 
@@ -19,12 +21,19 @@ function Login() {
       .then((userCredential) => {
         // User logged in successfully
         const user = userCredential.user;
-        console.log(user);
-        console.log('User logged in successfully');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          color: '#fff',
+          background: '#181818',
+          title: 'You signed in successfully',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        // console.log('User logged in successfully');
       })
       .catch((error) => {
         // Handle errors here
-        console.error(error);
         setError(error.message);
       });
   };
@@ -36,17 +45,29 @@ function Login() {
       .then((result) => {
         // User signed in successfully
         const user = result.user;
-        console.log(user);
-        console.log('User signed in successfully with Google account');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          color: '#fff',
+          background: '#181818',
+          title: 'You signed in successfully',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        // console.log('User signed in successfully with Google account');
       })
       .catch((error) => {
         // Handle errors here
-        console.error(error);
+        setError(error.message);
       });
   };
 
   return (
-    error ? <div className='error'><h1>{error}</h1><button onClick={() => setError(null)}>Try again</button></div>
+    error ? <div className='error'>
+      <span><BiErrorCircle /></span>
+      <h1>{error}</h1>
+      <button onClick={() => setError(null)}>Try again</button>
+    </div>
       :
       <div className='register'>
         <div className="logo"><span><ImTelegram /></span></div>

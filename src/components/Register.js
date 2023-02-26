@@ -8,6 +8,8 @@ import TextField from '@mui/material/TextField';
 import { Button, Checkbox, FormControlLabel, FormGroup, Stack } from '@mui/material';
 import { ImTelegram } from "react-icons/im";
 import Login from './Login';
+import { BiErrorCircle } from 'react-icons/bi';
+import Swal from 'sweetalert2';
 
 function Register() {
 
@@ -24,11 +26,19 @@ function Register() {
                 // User registered successfully
                 const user = userCredential.user;
                 console.log(user);
-                console.log('User registered successfully');
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    color: '#fff',
+                    background: '#181818',
+                    title: 'You registered in successfully',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+                // console.log('User registered successfully');
             })
             .catch((error) => {
                 // Handle errors here
-                console.error(error);
                 setError(error.message);
             });
     };
@@ -36,7 +46,11 @@ function Register() {
     return (
         user ? <ChatRoom user={user} /> :
             change ?
-                error ? <div className='error'><h1>{error}</h1><button onClick={() => setError(null)}>Try again</button></div>
+                error ? <div className='error'>
+                    <span><BiErrorCircle /></span>
+                    <h1>{error}</h1>
+                    <button onClick={() => setError(null)}>Try again</button>
+                </div>
                     :
                     <div className='register'>
                         <div className="logo"><span><ImTelegram /></span></div>

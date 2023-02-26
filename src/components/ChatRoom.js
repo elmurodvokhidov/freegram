@@ -15,6 +15,7 @@ import { MdOutlinePersonOutline } from "react-icons/md";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
+import Swal from 'sweetalert2';
 
 
 const firebaseConfig = {
@@ -93,7 +94,31 @@ function ChatRoom() {
 
     // Sign out Function
     const handleSignOut = () => {
-        auth.signOut();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            width: 500,
+            color: '#fff',
+            background: '#181818',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, log out!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                auth.signOut();
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    color: '#fff',
+                    background: '#181818',
+                    title: 'You have successfully logged out!',
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+        })
     };
 
     return (
